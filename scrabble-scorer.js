@@ -67,7 +67,7 @@ function vowelBonusScorer(bonus) {
 
 function scrabbleScorer(scrabble) {
    let scrabbleScore = 0
-   scrabble = scrabble.toUpperCase()
+   scrabble = scrabble.toLowerCase()
    for (let i = 0; i < scrabble.length; i++) {
       scrabbleScore += newPointStructure[scrabble[i]]
    } return scrabbleScore
@@ -77,17 +77,17 @@ const scoringAlgorithms = [
    {
       name: "Simple Score",
       description: "Each letter is worth 1 point",
-      scoreFunction: "A function with a parameter for user input that returns a score"
+      scorerFunction: simpleScorer
    },
    {
       name: "Bonus Vowels",
       description: "Vowels are 3 pts, consonants are 1 pt.",
-      scoreFunction: "A function that reutns a score based on the number of vowels and consonants."
+      scorerFunction: vowelBonusScorer
    },
    {
       name: "Scrabble",
       description: "The traditional socring algorithm.",
-      scoreFunction: "Uses the ScrabbleScorer() function to determine the score for a given word."
+      scorerFunction: scrabbleScorer
    }
 ];
 
@@ -114,7 +114,7 @@ function transform(oldPointStructure) {
    for (item in oldPointStructure) {
       let letters = oldPointStructure[item]
       for (let i = 0; i < letters.length; i++){
-         newStructure[letters[i]] = Number(item)
+         newStructure[letters[i].toLowerCase()] = Number(item)
       } 
    } return newStructure
 };
